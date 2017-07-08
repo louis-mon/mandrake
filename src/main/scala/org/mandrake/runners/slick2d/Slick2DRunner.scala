@@ -19,6 +19,7 @@ object Slick2DRunner {
         }
 
       override def render(container: GameContainer, g: Graphics): Unit = {
+        g.setAntiAlias(true)
         outEvents.foreach(renderer(container, g))
       }
     })
