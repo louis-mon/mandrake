@@ -27,8 +27,9 @@ class SphereHuntInit() extends SimpleInputState[SlickInput] {
     val input = event.container.getInput
     input.initControllers()
     val colors = Vector(Color.blue, Color.red, Color.green, Color.yellow)
-    val nbPlayers = Math.min(input.getControllerCount, colors.size)
-    StateOutput(SphereHunt(0.until(nbPlayers).map(i => Player(i, i * Angle.PI2.toFloat / nbPlayers, colors(i))).toVector))
+    val nbControllers = Math.min(input.getControllerCount, colors.size)
+    val playerIndexes = 0.until(nbControllers).filter(i => input.getAxisCount(i) > 1)
+    StateOutput(SphereHunt(playerIndexes.map(i => Player(i, i * Angle.PI2.toFloat / playerIndexes.size, colors(i))).toVector))
   }
 }
 
